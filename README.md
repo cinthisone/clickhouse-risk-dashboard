@@ -51,44 +51,58 @@ sudo service clickhouse-server start
 ```
 /
 ├── sql/           # Schema definitions and queries
-├── data/          # Sample datasets and storage
-├── scripts/       # ETL and analytics scripts
-├── app/           # Optional web interface
-└── memory-bank/   # Project documentation
+├── data/          # Sample datasets and storage (not tracked in git)
+├── scripts/       # ETL, analytics, and data download scripts
+├── app/           # Streamlit web interface
+├── requirements.txt
+├── README.md
+├── .gitignore
 ```
+
+# (Private/local only, not in repo)
+# ├── memory-bank/   # Project context and memory files
+# ├── Inhouse-Notes-Clickhouse/   # Personal ClickHouse learning notes
 
 ## Usage
 
 1. Data Ingestion:
-```bash
-python scripts/ingest_data.py
 ```
 
-2. Run Analytics:
-```bash
-python scripts/calculate_metrics.py
-```
+## 🚀 Cloud & Docker Deployment (Recommended)
 
-3. Launch Web Interface (Optional):
-```bash
-streamlit run app/main.py
-```
+You can deploy this project on any cloud VM (Azure, GCP, AWS, etc.) using Docker for fast, reproducible setup.
 
-## Development
+### Quick Start on a New VM (Azure, East US, Ubuntu 22.04)
 
-- Follow PEP 8 style guide
-- Write tests for new features
-- Update documentation as needed
-- Use type hints in Python code
+1. **Install Docker & Docker Compose:**
+   ```bash
+   sudo apt-get update
+   sudo apt-get install docker.io docker-compose -y
+   ```
+2. **Clone the repo:**
+   ```bash
+   git clone https://github.com/cinthisone/clickhouse-risk-dashboard.git
+   cd clickhouse-risk-dashboard
+   ```
+3. **Add the provided `docker-compose.yml` and `Dockerfile` if not present.**
+4. **Start the stack:**
+   ```bash
+   docker-compose up -d
+   ```
+5. **Access your dashboard:**
+   - Streamlit: `http://<your-vm-public-ip>:8501`
+   - ClickHouse HTTP: `http://<your-vm-public-ip>:8123`
 
-## License
+---
 
-MIT License
+## Next Steps for Your New Azure VM
 
-## Contributing
+1. **Open ports 22 (SSH), 8123 (ClickHouse HTTP), 9000 (ClickHouse native), and 8501 (Streamlit) in the Azure Portal.**
+2. **SSH into your VM using your private key.**
+3. **Follow the Docker Quick Start steps above.**
+4. **(Optional) Copy your data CSVs into the `data/` folder and re-run ingestion/analytics as needed.**
+5. **Visit your public IP in a browser to see your dashboard!**
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request 
+---
+
+For detailed Docker instructions and troubleshooting, see `Inhouse-Notes-Clickhouse/docker-deployment.md`.
