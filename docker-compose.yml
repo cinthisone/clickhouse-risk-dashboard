@@ -25,7 +25,7 @@ services:
       - CLICKHOUSE_HOST=clickhouse
       - CLICKHOUSE_PORT=8123
       - CLICKHOUSE_USER=default
-      - CLICKHOUSE_PASSWORD=
+      - CLICKHOUSE_PASSWORD=Ci4975!@#
       - CLICKHOUSE_DATABASE=financial_data
     volumes:
       - .:/app
