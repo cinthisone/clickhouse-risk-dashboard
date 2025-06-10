@@ -22,11 +22,11 @@ class DataIngestion:
     def __init__(self):
         """Initialize the data ingestion class."""
         self.client = clickhouse_connect.get_client(
-            host='localhost',
-            port=8123,  # HTTP port
-            username='default',
-            password='',
-            database='financial_data'
+            host=os.getenv('CLICKHOUSE_HOST'),
+            port=int(os.getenv('CLICKHOUSE_PORT')),
+            username=os.getenv('CLICKHOUSE_USER'),
+            password=os.getenv('CLICKHOUSE_PASSWORD'),
+            database=os.getenv('CLICKHOUSE_DB')
         )
 
     def load_csv_data(self, file_path: str, symbol: str) -> pd.DataFrame:

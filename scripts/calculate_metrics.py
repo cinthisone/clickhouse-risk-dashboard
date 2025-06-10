@@ -23,11 +23,11 @@ class RiskMetrics:
     def __init__(self):
         """Initialize the risk metrics calculator."""
         self.client = clickhouse_connect.get_client(
-            host='localhost',
-            port=8123,  # HTTP port
-            username='default',
-            password='',
-            database='financial_data'
+            host=os.getenv('CLICKHOUSE_HOST'),
+            port=int(os.getenv('CLICKHOUSE_PORT')),
+            username=os.getenv('CLICKHOUSE_USER'),
+            password=os.getenv('CLICKHOUSE_PASSWORD'),
+            database=os.getenv('CLICKHOUSE_DB')
         )
 
     def get_price_data(self, symbol: str, start_date: str, end_date: str) -> pd.DataFrame:

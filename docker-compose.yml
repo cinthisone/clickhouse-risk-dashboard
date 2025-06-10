@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   clickhouse:
     image: clickhouse/clickhouse-server:latest
@@ -7,6 +5,10 @@ services:
     ports:
       - "8123:8123"
       - "9000:9000"
+    environment:
+      - CLICKHOUSE_USER=${CLICKHOUSE_USER}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
+      - CLICKHOUSE_DB=${CLICKHOUSE_DB}
     volumes:
       - clickhouse_data:/var/lib/clickhouse
     ulimits:
@@ -21,12 +23,8 @@ services:
       - "8501:8501"
     depends_on:
       - clickhouse
-    environment:
-      - CLICKHOUSE_HOST=clickhouse
-      - CLICKHOUSE_PORT=8123
-      - CLICKHOUSE_USER=default
-      - CLICKHOUSE_PASSWORD=Ci4975!@#
-      - CLICKHOUSE_DATABASE=financial_data
+    env_file:
+      - .env.docker
     volumes:
       - .:/app
 

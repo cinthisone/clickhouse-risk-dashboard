@@ -1,2 +1,5 @@
 memory-bank/
-Inhouse-Notes-Clickhouse/ .env
+Inhouse-Notes-Clickhouse/ 
+.env
+.env.development
+.env.docker

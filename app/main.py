@@ -24,10 +24,10 @@ class FinancialVisualizer:
     def __init__(self):
         """Initialize the financial visualizer."""
         self.client = clickhouse_connect.get_client(
-            host='clickhouse',
-            port=8123,
-            username='default',
-            password='Ci4975!@#'
+            host=os.getenv('CLICKHOUSE_HOST'),
+            port=int(os.getenv('CLICKHOUSE_PORT')),
+            username=os.getenv('CLICKHOUSE_USER'),
+            password=os.getenv('CLICKHOUSE_PASSWORD')
         )
 
     def get_available_symbols(self) -> List[str]:
